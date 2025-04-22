@@ -157,7 +157,7 @@ class authentication {
 	
 	    if($session->rowCount() > 0){
 		    $sessiondata = $session->fetch(PDO::FETCH_ASSOC);
-		    $creator = $pdo->prepare('SELECT id, username, email, regtime, robux, tix, role, placelimit, builderclub FROM `users` WHERE `id` = :ownid');
+		    $creator = $pdo->prepare('SELECT id, username, regtime, robux, tix, role, placelimit, builderclub FROM `users` WHERE `id` = :ownid');
 		    $creator->bindParam(':ownid', $sessiondata['ownid'], PDO::PARAM_STR);
 		    $creator->execute();
 		    $userinfo = $creator->fetch(PDO::FETCH_ASSOC);

@@ -298,8 +298,16 @@ function setupClientHandlerRoutes($router) {
         die('{"data":["b67aae1c484d5b6ffc81087cf4750df4", "fbef7ea764fdebb9dd901c21c31a8d86", "a576627a9e267fbd91b09a495439dac8", "b38ca9f41e395949a9bb586a040d9d9c", "6f07ee24b7d1f344f39bd04db994f229"]}');
     });
     
-    $router->get('/report/systats', function() {
-        if(isset($_GET["UserID"]) && isset($_GET["Message"])){
+    $router->get('/report/systats/', function() {
+
+        
+        if(isset($_GET["UserID"]) && isset($_GET["Message"]) && isset($_GET["apikey"])){
+            
+            if($_GET["apikey"] !== rccapikey){
+                http_response_code(400);
+                die();
+            }    
+            
             $message = $_GET["Message"];
             $userid = $_GET["UserID"];
             include("../conn.php");
@@ -328,6 +336,9 @@ function setupClientHandlerRoutes($router) {
             }
         
             
+        } else {
+            http_response_code(400);
+            die("Bad Request.");
         }
     
     });
@@ -506,7 +517,7 @@ function setupClientHandlerRoutes($router) {
             } else {
                 $ch = curl_init("https://assetdelivery.roblox.com/v2/asset/?id=" . urlencode($id) . "&version=" . $version);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                    "Cookie:.ROBLOSECURITY=$roblosecurity",
+                    "Cookie:.ROBLOSECURITY=".roblosecurity,
                     "User-Agent: Roblox/WinInet"
                 ]);
                 curl_setopt_array($ch, [
@@ -572,7 +583,7 @@ function setupClientHandlerRoutes($router) {
             } else {
                 $ch = curl_init("https://assetdelivery.roblox.com/v2/asset/?id=" . urlencode($id) . "&version=" . $version);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                    "Cookie:.ROBLOSECURITY=$roblosecurity",
+                    "Cookie:.ROBLOSECURITY=" . roblosecurity,
                     "User-Agent: Roblox/WinInet"
                 ]);
                 curl_setopt_array($ch, [

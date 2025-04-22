@@ -215,7 +215,7 @@ function setupWebHandlerRoutes($router) {
         });
 
         $router->get("/login", function() {
-            //checkmaintenance();
+            //
                 include "../templates/login.php";
         });
         
@@ -228,12 +228,12 @@ function setupWebHandlerRoutes($router) {
         });
         
         $router->get("/game/{id}/", function($id) {
-            // checkmaintenance();
+            // 
                 include "../templates/play.php";
         });
         
         $router->get("/logout", function() {
-            checkmaintenance();
+            
             setcookie("watrbxcookie", "", time() - 99999999, "/", "", false, true);
             setcookie(".ROBLOSECURITY", "", time() - 86400, "/", "", false, true);
             header("Location: /");
@@ -241,12 +241,17 @@ function setupWebHandlerRoutes($router) {
         });
         
         $router->get("/game/logout.aspx", function() {
-            checkmaintenance();
+            
             setcookie("watrbxcookie", "", time() - 99999999, '');
             setcookie(".ROBLOSECURITY", "", time() - 86400, "/", "", false, true);
         });
         
         $router->post("/login", function() {
+            
+            //$sitefunc = new sitefunctions();
+            //$sitefunc->set_message("Login is currently disabled. Check back later!", "notice");
+            //header("Location: /login");
+            //die();
 
             if(isset($_POST["username"]) && isset($_POST["password"])){
                 $auth = new authentication();
@@ -332,32 +337,23 @@ function setupWebHandlerRoutes($router) {
                     "RobuxBalance" => 0,
                     "TicketsBalance" => 0,
                     "IsAnyBuildersClubMember" => false,
-                    "ThumbnailUrl" => "http://yourthumbnail.here/or_this_can_be_a_blank"
+                    "ThumbnailUrl" => ""
                 ]
             ],JSON_UNESCAPED_SLASHES)); 
         });
         
         $router->get("/register", function() {
-            checkmaintenance();
-            //die("Not usable currently.");
             include "../templates/register.php";
         });
         
         $router->get("/game/upload", function() {
-            checkmaintenance();
+            
             //ie("Not usable currently.");
             include "../templates/creategame.php";
         });
         
-        $router->get("/testemail", function() {
-            $emailhtml = file_get_contents("../storage/email-templates/verifytemp.html");
-            $emailhtml = str_replace("{username}","watrabi", $emailhtml); // eventually make a parser for this
-            $emailhtml = str_replace("{link}","https://sitetest1.watrbx.xyz/verify-email?id=test", $emailhtml);
-            die(sendmail("info@watrlabs.lol", "2028mitchell.luke@fcboe.org", "Verify Account: watrabi", $emailhtml, true));
-        });
-        
         //$router->get("/games", function() {
-        //    checkmaintenance();
+        //    
         //    include "../templates/games.php";
         //});
 
@@ -666,7 +662,7 @@ function setupWebHandlerRoutes($router) {
         });
         
         $router->post("/register", function() {
-            checkmaintenance();
+            
             
             $sitefunc = new sitefunctions();
             $siteconf = $sitefunc->getsiteconf();
@@ -810,13 +806,13 @@ function setupWebHandlerRoutes($router) {
         });
         
         $router->get("/home", function() {
-            //checkmaintenance();
+            //
                 include "../templates/home.php"; 
         });
         
         $router->get("/thickofit", function() {
             #thick of it doesnt need any maintenance
-            #checkmaintenance();
+            #
             echo "40 smthing milly subs or so ive been told";
         });
         

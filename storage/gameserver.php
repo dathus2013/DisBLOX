@@ -69,6 +69,7 @@ if url~=nil then
 	pcall(function() game:GetService("ScriptInformationProvider"):SetAssetUrl(url .. "/asset/") end)
 	pcall(function() game:GetService("ContentProvider"):SetBaseUrl(url .. "/") end)
 	pcall(function() game:GetService("Players"):SetChatFilterUrl(url .. "/Game/ChatFilter.ashx") end)
+	pcall(function() game:GetService("Players"):SetSysStatsUrl(url .. "/report/systats/?apikey=" .. apikey) end)
 	
 
 
@@ -177,7 +178,7 @@ end)
 
 -- StartGame -- 
 game:GetService("RunService"):Run()
-game:HttpGet("https://www.watrbx.xyz/matchmake/serverstart?jobid=" .. jobid .. "apikey=SNjWuZpuITp7rARRo0RET12yIx42dXHOr45bzvo2TJewWNOWnYeeoqD0K2BsJHwq")
+game:HttpGet("https://www.watrbx.xyz/matchmake/serverstart?jobid=" .. jobid .. "apikey=" .. apikey)
 
 
 
@@ -188,6 +189,6 @@ start(<?=$place?>, <?=$port?>, "https://www.watrbx.xyz")
 
 while wait(30) do
     if #game:GetService("Players"):GetPlayers() == 0 then
-        game:HttpGet("https://www.watrbx.xyz/matchmake/serverend?jobid=" .. jobid .. "apikey=SNjWuZpuITp7rARRo0RET12yIx42dXHOr45bzvo2TJewWNOWnYeeoqD0K2BsJHwq")
+        game:HttpGet("https://www.watrbx.xyz/matchmake/serverend?jobid=" .. jobid .. "apikey=" .. apikey)
     end
 end

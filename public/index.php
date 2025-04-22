@@ -60,66 +60,6 @@ try {
     $requestMethod = $_SERVER['REQUEST_METHOD'];
     $router->dispatch($requestUri, $requestMethod);
     
-    try {
-        include(baseurl . "/conn.php");
-        
-        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-            $ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
-        
-        $ifclient;
-        if(strpos($useragent, "Roblox")){
-            $ifclient = 1;
-        } else {
-            $ifclient = 0;
-        }
-        
-        if(isset($_COOKIE["watrbxcookie"]) || isset($_COOKIE["_ROBLOSECURITY"])){
-            $auth = new authentication();
-            $user = $auth->getuserinfo($_COOKIE["watrbxcookie"] ?? $_COOKIE["_ROBLOSECURITY"]); // this should work I think...
-            if($user !== false){
-                $user = $user["id"];
-            } else {
-                $user = 0;  
-            }
-        } else {
-            $user = 0;
-        }
-        
-        $sitefunc = new sitefunctions();
-        $ip2 = $sitefunc->encrypt($ip);
-        
-        $analytics = $pdo->prepare("INSERT INTO logs (ip, page, method, isclient, user) VALUES (:ip, :page, :method, :isclient, :user)");
-        $analytics->bindParam(':ip', $ip, PDO::PARAM_STR);
-        $analytics->bindParam(':page', $requestUri, PDO::PARAM_STR);
-        $analytics->bindParam(':method', $requestMethod, PDO::PARAM_STR);
-        $analytics->bindParam(':isclient', $ifclient, PDO::PARAM_STR);
-        $analytics->bindParam(':user', $user, PDO::PARAM_STR);
-        $analytics->execute();
-        
-        $ipbanned = $pdo->prepare("SELECT * FROM ipban WHERE ip = ?");
-        $ipbanned->execute([$ip2]);
-        $isbanned = $ipbanned->fetch(PDO::FETCH_ASSOC);
-        
-        $ipbanned = $pdo->prepare("SELECT * FROM ipban WHERE ip = ?");
-        $ipbanned->execute([$ip]);
-        $isbanned = $ipbanned->fetch(PDO::FETCH_ASSOC);
-        
-        if($isbanned){
-            ob_clean();
-            http_response_code(403);
-            die("You have been ip banned for <i>".$isbanned["reason"]."</i>.");
-        }
-        
-        
-        
-    } catch(PDOException $e){
-        // do nuthin. analytics and whatnot dont matter too much....
-        die($e); // 4 debug...
-    }
-    
 
     } catch (ErrorException $e) {
         $router->reporterror($e);
