@@ -680,7 +680,7 @@ function setupWebHandlerRoutes($router) {
             }
             
             $auth = new authentication();
-            if(isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confpassword"]) && isset($_POST["cf-turnstile-response"]) && isset($_POST["js_check"])){
+            if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["confpassword"]) && isset($_POST["cf-turnstile-response"]) && isset($_POST["js_check"])){
                 
                 $dontreg = false;
                 
@@ -701,12 +701,10 @@ function setupWebHandlerRoutes($router) {
                 }
                 
                 $func = new sitefunctions();
-                
-                $secretKey = "0x4AAAAAABOjpJV3xg02-w-pD0O2BGDS844";
 	            $cfresponse = $_POST["cf-turnstile-response"];
 	            
 	            $url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-                $post_data = array('secret' => $secretKey, "response"=>$cfresponse);
+                $post_data = array('secret' => turnstilekey, "response"=>$cfresponse);
 
 
                 $ch = curl_init($url);

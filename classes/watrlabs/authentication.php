@@ -339,7 +339,7 @@ class authentication {
 
     }
 
-    public function createuser($username, $email, $password, $confpasswordd) {
+    public function createuser($username, $password, $confpasswordd) {
         include(baseurl . '/conn.php');
         // they're all already put in variables for us :party:
             
@@ -374,16 +374,6 @@ class authentication {
                 $returnvar = array(
                     'code' => '400',
                     'message' => 'Username is empty.',
-                );
-                
-                return json_encode($returnvar);
-                exit();
-            }
-            
-            if(empty($email)){
-                $returnvar = array(
-                'code' => '400',
-                'message' => 'E-Mail is empty.',
                 );
                 
                 return json_encode($returnvar);
@@ -429,16 +419,6 @@ class authentication {
                 return json_encode($returnvar);
                 exit();
             }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $returnvar = array(
-                'code' => '400',
-                'message' => 'E-Mail is not in a valid format.',
-                );
-                
-                return json_encode($returnvar);
-                exit();
-            }
             
             if (strlen($username) >= 55){
                 $returnvar = array(
@@ -454,16 +434,6 @@ class authentication {
                 $returnvar = array(
                 'code' => '400',
                 'message' => 'Username is too short.',
-                );
-                
-                return json_encode($returnvar);
-                exit();
-            }
-            
-            if (strlen($email) > 70){
-                $returnvar = array(
-                'code' => '400',
-                'message' => 'E-Mail is too long.',
                 );
                 
                 return json_encode($returnvar);
@@ -648,10 +618,9 @@ class authentication {
                     exit();
                 }
             
-                $query = 'INSERT INTO users (username, email, password, regtime) VALUES (:username, :email, :password, :regtime)';
+                $query = 'INSERT INTO users (username, password, regtime) VALUES (:username, :password, :regtime)';
                 $stmt = $pdo->prepare($query);
                 $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                 $stmt->bindParam(':password', $password, PDO::PARAM_STR);
                 $stmt->bindParam(':regtime', $regtime, PDO::PARAM_INT);
                 $stmt->execute();

@@ -53,3 +53,5 @@ define("rccapikey", "");
 define("prodwebhook", "");
 define("errorwebhook", "");
 define("chatwebhook", "");
+define("roblosecurity", "");
+define("turnstilekey", "");

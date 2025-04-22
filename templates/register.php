@@ -31,10 +31,6 @@
 					<input required align="right" name="username" placeholder="3 to 20 characters long">
 				</div>
 				<div align="right">
-					<span> E-Mail: </span>
-					<input required align="right" name="email" placeholder="3 to 100 characters long">
-				</div>
-				<div align="right">
 					<span> Password: </span>
 					<input required align="right" type="password" name="password" placeholder="5 to 100 characters long.">
 				</div>
