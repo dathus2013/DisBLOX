@@ -4,6 +4,8 @@ namespace swordrunning;
 
 class gameserver {
     
+    // this is really old code (sword is a lot better about coding now :skull_praying:)
+    
     public static function guidv4($data = null) {
             $data = $data ?? random_bytes(16);
             assert(strlen($data) == 16);

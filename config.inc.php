@@ -49,3 +49,5 @@ define("arbiterKeySite", "");
 define("arbiterIp", "");
 define("arbiterPort", "");
 define("rccapikey", "");
+define("prodwebhook", "");
+define("errorwebhook", "");

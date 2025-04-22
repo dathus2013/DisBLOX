@@ -14,8 +14,6 @@ class logging {
     public function errorwebhook($error) {
         // just steal- i mean borrowing code from https://gist.github.com/Mo45/cb0813cb8a6ebcd6524f6a36d4f8862c
 
-
-        $webhookurl = "https://discord.com/api/webhooks/1326553826919977084/V6Im18vfbcWvKufIe4R_ngRQBIbED9EZnLGGRzXgE7wJlWKDbUx7lxseh1DTQTtvvTaE";
         $timestamp = date("c", strtotime("now"));
         $json_data = json_encode([
             "tts" => false,
@@ -32,7 +30,7 @@ class logging {
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 
 
-        $ch = curl_init( $webhookurl );
+        $ch = curl_init( prodwebhook );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
@@ -51,7 +49,6 @@ class logging {
         // just steal- i mean borrowing code from https://gist.github.com/Mo45/cb0813cb8a6ebcd6524f6a36d4f8862c
 
         //include(baseurl . "/config.php");   
-        $webhookurl = "https://discord.com/api/webhooks/1326553826919977084/V6Im18vfbcWvKufIe4R_ngRQBIbED9EZnLGGRzXgE7wJlWKDbUx7lxseh1DTQTtvvTaE";
         $timestamp = date("c", strtotime("now"));
         $json_data = json_encode([
             "tts" => false,
@@ -68,7 +65,7 @@ class logging {
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 
 
-        $ch = curl_init( $webhookurl );
+        $ch = curl_init( prodwebhookurl );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
