@@ -16,7 +16,7 @@
 
 function start(placeId, port, url)
 
-apikey = "SNjWuZpuITp7rARRo0RET12yIx42dXHOr45bzvo2TJewWNOWnYeeoqD0K2BsJHwq"
+apikey = "<?=rccapikey?>"
 
 ------------------- UTILITY FUNCTIONS --------------------------
 
