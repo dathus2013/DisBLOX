@@ -43,6 +43,7 @@ $maintkey = "this should really be dynamic...";
 //$guests = false; // this doesnt work ill fix it later.. (oops this in admin panel now!)
 
 // watrbx specific
+$roblosecurity = "";
 
 define("arbiterKey", "");
 define("arbiterKeySite", "");
@@ -51,3 +52,4 @@ define("arbiterPort", "");
 define("rccapikey", "");
 define("prodwebhook", "");
 define("errorwebhook", "");
+define("chatwebhook", "");
