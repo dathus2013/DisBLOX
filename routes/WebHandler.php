@@ -729,7 +729,7 @@ function setupWebHandlerRoutes($router) {
                 
                 if($keycheck){
                     
-                    $result = $auth->createuser($_POST["username"], $_POST["email"], $_POST["password"], $_POST["confpassword"]);
+                    $result = $auth->createuser($_POST["username"], $_POST["password"], $_POST["confpassword"]);
                     $decoded = json_decode($result, true);
                     
                    
@@ -765,9 +765,9 @@ function setupWebHandlerRoutes($router) {
                         $token = $decoded["token"];
                         setcookie("watrbxcookie", $token, time() + 864000, '');
                         
-                        $emailhtml = file_get_contents("../storage/email-templates/welcome.html");
-                        $emailhtml = str_replace("{username}",$_POST["username"], $emailhtml); // eventually make a parser for this
-                        sendmail("info@watrlabs.lol", $_POST["email"], "Welcome to watrbx!", $emailhtml, true);
+                        //$emailhtml = file_get_contents("../storage/email-templates/welcome.html");
+                        //$emailhtml = str_replace("{username}",$_POST["username"], $emailhtml); // eventually make a parser for this
+                        //sendmail("info@watrlabs.lol", $_POST["email"], "Welcome to watrbx!", $emailhtml, true);
                         
                         header("Location: /home");
                         die();
